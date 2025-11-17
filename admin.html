@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Class Schedule</title>
+    <link rel="stylesheet" href="admin.css">
+    <style>
+        /* Basic CSS for layout */
+        .main-container {
+            display: flex;
+        }
+        #sidebar {
+            width: 200px;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        #schedule-container {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .year-item {
+            margin-bottom: 10px;
+        }
+        .year-title {
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .sections {
+            display: none; /* Initially hide sections */
+            margin-left: 10px;
+        }
+        .section-item {
+            cursor: pointer;
+            padding: 5px 0;
+        }
+        .section-schedule {
+            display: none; /* Initially hide schedules */
+        }
+        .section-schedule.active {
+            display: block;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #333;
+            color: white;
+        }
+        .add-button {
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<header>
+    </header>
+    <div class="header-content">
+        <div class="logo-text-container">
+            <img src="photos/logo.png" alt="School Logo" class="school-logo">
+            <div class="header-text">
+                <h1 class="header-title">CPSU Class Schedule</h1>
+                <p class="header-subtitle">College of Computer Studies - Academic Year 2025-2026</p>
+            </div>
+        </div>
+
+<div class="main-container">
+    <div id="sidebar">
+        <h2>Class Schedule</h2>
+        <button id="global-add-button" class="add-button">Add New Schedule</button>
+        <div id="menu">
+            <div class="year-item">
+                <div class="year-title">LAB 1</div>
+                <div class="sections">
+                    <div class="section-item" onclick="displaySectionSchedule('1st Year', 'Section A')">Section A</div>
+                    <div class="section-item" onclick="displaySectionSchedule('1st Year', 'Section B')">Section B</div>
+                </div>
+            </div>
+            <div class="year-item">
+                <div class="year-title">LAB 2</div>
+                <div class="sections">
+                    <div class="section-item" onclick="displaySectionSchedule('2nd Year', 'Section C')">Section C</div>
+                    <div class="section-item" onclick="displaySectionSchedule('2nd Year', 'Section D')">Section D</div>
+                </div>
+            </div>
+            </div>
+    </div>
+
+    <div id="schedule-container">
+        <div id="1st-Year-Section-A-schedule" class="section-schedule">
+            <h3>1st Year - Section A</h3>
+            <table>
+                <thead>
+                    <tr><th>Day</th><th>Time</th><th>Subject</th><th>Facility</th><th>Instructor</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Monday</td><td>10:00 AM</td><td>Introduction to Programming</td><td>Lab 1</td><td>Mr. Smith</td><td><button>Edit</button> <button>Delete</button></td></tr>
+                    <tr><td>Tuesday</td><td>01:00 PM</td><td>Mathematics</td><td>Room 101</td><td>Ms. Jones</td><td><button>Edit</button> <button>Delete</button></td></tr>
+                    </tbody>
+            </table>
+        </div>
+
+        <div id="1st-Year-Section-B-schedule" class="section-schedule">
+            <h3>1st Year - Section B</h3>
+            <table>
+                <thead>
+                    <tr><th>Day</th><th>Time</th><th>Subject</th><th>Facility</th><th>Instructor</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Monday</td><td>01:00 PM</td><td>Introduction to Programming</td><td>Lab 2</td><td>Mr. Brown</td><td><button>Edit</button> <button>Delete</button></td></tr>
+                    <tr><td>Wednesday</td><td>10:00 AM</td><td>Mathematics</td><td>Room 102</td><td>Ms. Davis</td><td><button>Edit</button> <button>Delete</button></td></tr>
+                    </tbody>
+            </table>
+        </div>
+
+        <div id="2nd-Year-Section-C-schedule" class="section-schedule">
+            <h3>2nd Year - Section C</h3>
+            <table>
+                <thead>
+                    <tr><th>Day</th><th>Time</th><th>Subject</th><th>Facility</th><th>Instructor</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Tuesday</td><td>10:00 AM</td><td>Data Structures and Algorithms</td><td>Lab 3</td><td>Mr. Wilson</td><td><button>Edit</button> <button>Delete</button></td></tr>
+                    <tr><td>Thursday</td><td>01:00 PM</td><td>Web Development</td><td>Lab 4</td><td>Ms. Garcia</td><td><button>Edit</button> <button>Delete</button></td></tr>
+                    </tbody>
+            </table>
+        </div>
+
+        <div id="2nd-Year-Section-D-schedule" class="section-schedule">
+            <h3>2nd Year - Section D</h3>
+            <table>
+                <thead>
+                    <tr><th>Day</th><th>Time</th><th>Subject</th><th>Facility</th><th>Instructor</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Wednesday</td><td>01:00 PM</td><td>Data Structures and Algorithms</td><td>Lab 4</td><td>Mr. Taylor</td><td><button>Edit</button> <button>Delete</button></td></tr>
+                    <tr><td>Friday</td><td>10:00 AM</td><td>Web Development</td><td>Lab 1</td><td>Ms. Rodriguez</td><td><button>Edit</button> <button>Delete</button></td></tr>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    const yearTitles = document.querySelectorAll('.year-title');
+    const sectionItems = document.querySelectorAll('.section-item');
+    const scheduleContainers = document.querySelectorAll('.section-schedule');
+    const globalAddButton = document.getElementById('global-add-button');
+    let currentYear = null;
+    let currentSection = null;
+
+    yearTitles.forEach(title => {
+        title.addEventListener('click', function() {
+            const sectionsDiv = this.nextElementSibling;
+            if (sectionsDiv) {
+                sectionsDiv.style.display = sectionsDiv.style.display === 'block' ? 'none' : 'block';
+            }
+        });
+    });
+
+    function displaySectionSchedule(year, section) {
+        currentYear = year;
+        currentSection = section;
+
+        scheduleContainers.forEach(container => {
+            container.classList.remove('active');
+        });
+
+        const scheduleId = `${year.replace(/\s+/g, '-')}-${section.replace(/\s+/g, '-')}-schedule`;
+        const targetSchedule = document.getElementById(scheduleId);
+
+        if (targetSchedule) {
+            targetSchedule.classList.add('active');
+        }
+    }
+
+    if (globalAddButton) {
+        globalAddButton.addEventListener('click', function() {
+            if (currentYear && currentSection) {
+                alert(`Adding new schedule for ${currentYear} - ${currentSection}`);
+                // Here you would implement the client-side logic to add a new row
+                // to the currently displayed table. This would likely involve
+                // manipulating the DOM directly using JavaScript.
+            } else {
+                alert('Please select a year and section in the sidebar first before adding a new schedule.');
+            }
+        });
+    }
+
+    // Initially expand the first year and display the first section
+    const firstYearItem = document.querySelector('.year-item');
+    if (firstYearItem) {
+        firstYearItem.querySelector('.sections').style.display = 'block';
+        const firstSectionItem = firstYearItem.querySelector('.section-item');
+        if (firstSectionItem) {
+            const year = firstYearItem.querySelector('.year-title').textContent;
+            const section = firstSectionItem.textContent;
+            displaySectionSchedule(year, section);
+        }
+    }
+</script>
+
+</body>
+</html>
